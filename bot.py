@@ -99,4 +99,4 @@ async def skip(ctx):
     else:
         await ctx.send("No audio is currently playing.")
 
-bot.run("MTMwNzkzMTQ5MDQzNjI1MTY3OA.GpsIaT.pUmWr4ljKrgmvEz-xmQJVeem8vXE7DFnAn8_EM")
+bot.run("key")
