@@ -2,13 +2,10 @@ import discord
 from discord.ext import commands
 import asyncio
 import yt_dlp
-
-# Intents and bot setup
 intents = discord.Intents.default()
-intents.message_content = True  # Ensure you enable message content intent in the Developer Portal
+intents.message_content = True 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-# Global variables for the voice client and playback queue
 voice_client = None
 queue = []
 
@@ -18,7 +15,6 @@ async def on_ready():
 
 @bot.command()
 async def join(ctx):
-    """Command for the bot to join the voice channel."""
     if ctx.author.voice:
         channel = ctx.author.voice.channel
         global voice_client
@@ -32,7 +28,6 @@ async def join(ctx):
 
 @bot.command()
 async def leave(ctx):
-    """Command for the bot to leave the voice channel."""
     global voice_client
     if voice_client and voice_client.is_connected():
         await voice_client.disconnect()
@@ -54,7 +49,6 @@ def play_next(ctx):
 
 @bot.command()
 async def play(ctx, *, search_query):
-    """Command to play audio from a YouTube search or URL."""
     global voice_client, queue
     if not voice_client or not voice_client.is_connected():
         await ctx.send("I'm not in a voice channel! Use `!join` first.")
@@ -73,8 +67,8 @@ async def play(ctx, *, search_query):
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(search_query, download=False)
-            if 'entries' in info:  # When using ytsearch, entries contains the search results
-                info = info['entries'][0]  # Select the first result
+            if 'entries' in info:
+                info = info['entries'][0]
             url2 = info['url']
 
         if voice_client.is_playing():
@@ -89,7 +83,6 @@ async def play(ctx, *, search_query):
 
 @bot.command()
 async def stop(ctx):
-    """Command to stop the current audio."""
     global voice_client
     if voice_client and voice_client.is_playing():
         voice_client.stop()
@@ -99,13 +92,11 @@ async def stop(ctx):
 
 @bot.command()
 async def skip(ctx):
-    """Command to skip the current audio."""
     global voice_client
     if voice_client and voice_client.is_playing():
-        voice_client.stop()  # Stopping the current playback automatically triggers the next song in the queue
+        voice_client.stop() 
         await ctx.send("Skipped to the next song!")
     else:
         await ctx.send("No audio is currently playing.")
 
-# Run the bot
 bot.run("MTMwNzkzMTQ5MDQzNjI1MTY3OA.GpsIaT.pUmWr4ljKrgmvEz-xmQJVeem8vXE7DFnAn8_EM")
