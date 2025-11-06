@@ -4,7 +4,7 @@ Este é um projeto simples de um robô (bot) do Discord, que eu utilizo até hoj
 
 Atualmente, eu deixo ele rodando em meu computador pessoal quando quero usá-lo.
 
-## [EN] (English below)
+## [EN]
 
 This is a simple working project of a Discord bot, which I still use with my friends. Built using Python, it's capable of joining voice channels and -- through Youtube's API -- search for songs or videos based on the user's input and play those songs in the voice channel. The user is also able to skip songs (skip), stop (stop), as well as forcing the bot to leave).
 
